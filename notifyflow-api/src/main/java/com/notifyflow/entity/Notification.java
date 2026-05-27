@@ -5,35 +5,46 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "notifications")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="recipient", length=100, nullable = false)
     private String recipient;
 
     @Enumerated(EnumType.STRING)
     private NotificationType type;
 
+    @Column(name="subject", length = 255, nullable = false)
     private String subject;
 
+    @Column(name="message", columnDefinition = "TEXT", nullable = false)
     private String message;
 
     @Enumerated(EnumType.STRING)
     private NotificationStatus status;
 
+    @Column(name="scheduled_at")
     private LocalDateTime scheduledAt;
 
+    @Column(name="sent_at")
     private LocalDateTime sentAt;
 
+    @Column(name="retry_count", nullable = false)
     private int retryCount;
 
+    @Column(name="max_retries", nullable = false)
     private int maxRetries;
 
+    @Column(name="failure_reason", columnDefinition = "TEXT")
     private String failureReason;
 
+    @Column(name="created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name="updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
     protected Notification() {}
