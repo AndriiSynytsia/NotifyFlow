@@ -1,7 +1,5 @@
 package com.notifyflow.entity;
 
 public enum NotificationType {
-    EMAIL,
-    SMS,
-    WEBHOOK
+    EMAIL, SMS, WEBHOOK
 }

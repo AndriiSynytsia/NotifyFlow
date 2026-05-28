@@ -11,52 +11,46 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="recipient", length=100, nullable = false)
+    @Column(name = "recipient", length = 100, nullable = false)
     private String recipient;
 
     @Enumerated(EnumType.STRING)
     private NotificationType type;
 
-    @Column(name="subject", length = 255, nullable = false)
+    @Column(name = "subject", length = 255, nullable = false)
     private String subject;
 
-    @Column(name="message", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "message", columnDefinition = "TEXT", nullable = false)
     private String message;
 
     @Enumerated(EnumType.STRING)
     private NotificationStatus status;
 
-    @Column(name="scheduled_at")
+    @Column(name = "scheduled_at")
     private LocalDateTime scheduledAt;
 
-    @Column(name="sent_at")
+    @Column(name = "sent_at")
     private LocalDateTime sentAt;
 
-    @Column(name="retry_count", nullable = false)
+    @Column(name = "retry_count", nullable = false)
     private int retryCount;
 
-    @Column(name="max_retries", nullable = false)
+    @Column(name = "max_retries", nullable = false)
     private int maxRetries;
 
-    @Column(name="failure_reason", columnDefinition = "TEXT")
+    @Column(name = "failure_reason", columnDefinition = "TEXT")
     private String failureReason;
 
-    @Column(name="created_at", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name="updated_at", nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    protected Notification() {}
+    protected Notification() {
+    }
 
-    public Notification(
-            String recipient,
-            NotificationType type,
-            String subject,
-            String message,
-            LocalDateTime scheduledAt,
-            int maxRetries
-    ){
+    public Notification(String recipient, NotificationType type, String subject, String message, LocalDateTime scheduledAt, int maxRetries) {
         this.recipient = recipient;
         this.type = type;
         this.subject = subject;
