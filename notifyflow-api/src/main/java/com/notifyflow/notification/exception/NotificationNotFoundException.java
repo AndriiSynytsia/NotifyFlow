@@ -1,4 +1,4 @@
-package com.notifyflow.notification.excepiton;
+package com.notifyflow.notification.exception;
 
 public class NotificationNotFoundException extends RuntimeException {
     public NotificationNotFoundException(Long id) {
