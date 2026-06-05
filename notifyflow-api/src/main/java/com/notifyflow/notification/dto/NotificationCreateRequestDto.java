@@ -1,6 +1,6 @@
-package com.notifyflow.dto;
+package com.notifyflow.notification.dto;
 
-import com.notifyflow.entity.NotificationType;
+import com.notifyflow.notification.entity.NotificationType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
