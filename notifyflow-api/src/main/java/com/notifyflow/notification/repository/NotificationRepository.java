@@ -13,5 +13,5 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     Page<Notification> findByStatus(NotificationStatus status, Pageable pageable);
 
-    Page<Notification> findByStatusAndScheduledAtLessThanEqual(NotificationStatus status, ZonedDateTime scheduledAt, Pageable pageable);
+    Page<Notification> findByStatusAndScheduledAtLessThanEqualOrderByScheduledAtAsc(NotificationStatus status, ZonedDateTime scheduledAt, Pageable pageable);
 }
