@@ -115,5 +115,24 @@ public class Notification {
         return updatedAt;
     }
 
-    //TODO: Domain methods to implement as markAsSent, markAsFailed etc.
+    public void markAsProcessing() {
+        if (status != NotificationStatus.PENDING && status != NotificationStatus.QUEUED) {
+            throw new IllegalStateException("Notification can not be processed from status: " + status);
+        }
+        status = NotificationStatus.PROCESSING;
+        updatedAt = ZonedDateTime.now();
+    }
+
+    public void markAsSent() {
+        status = NotificationStatus.SENT;
+        sentAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
+    }
+
+    public void markAsFailed(String reason) {
+        retryCount++;
+        failureReason = reason;
+        status = retryCount >= maxRetries ? NotificationStatus.FAILED : NotificationStatus.PENDING;
+        updatedAt = ZonedDateTime.now();
+    }
 }
