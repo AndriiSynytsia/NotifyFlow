@@ -4,7 +4,7 @@ import com.notifyflow.notification.dto.NotificationCreateRequestDto;
 import com.notifyflow.notification.dto.NotificationResponseDto;
 import com.notifyflow.notification.entity.Notification;
 import com.notifyflow.notification.entity.NotificationStatus;
-import com.notifyflow.notification.excepiton.NotificationNotFoundException;
+import com.notifyflow.notification.exception.NotificationNotFoundException;
 import com.notifyflow.notification.mapper.NotificationMapper;
 import com.notifyflow.notification.repository.NotificationRepository;
 import org.springframework.data.domain.Page;
