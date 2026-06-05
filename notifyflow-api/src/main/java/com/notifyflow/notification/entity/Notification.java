@@ -1,51 +1,56 @@
-package com.notifyflow.entity;
+package com.notifyflow.notification.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
+@Table(name = "notifications")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "recipient", length = 100, nullable = false)
     private String recipient;
 
     @Enumerated(EnumType.STRING)
     private NotificationType type;
 
+    @Column(name = "subject", length = 255, nullable = false)
     private String subject;
 
+    @Column(name = "message", columnDefinition = "TEXT", nullable = false)
     private String message;
 
     @Enumerated(EnumType.STRING)
     private NotificationStatus status;
 
-    private LocalDateTime scheduledAt;
+    @Column(name = "scheduled_at")
+    private ZonedDateTime scheduledAt;
 
-    private LocalDateTime sentAt;
+    @Column(name = "sent_at")
+    private ZonedDateTime sentAt;
 
+    @Column(name = "retry_count", nullable = false)
     private int retryCount;
 
+    @Column(name = "max_retries", nullable = false)
     private int maxRetries;
 
+    @Column(name = "failure_reason", columnDefinition = "TEXT")
     private String failureReason;
 
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", nullable = false)
+    private ZonedDateTime createdAt;
 
-    private LocalDateTime updatedAt;
+    @Column(name = "updated_at", nullable = false)
+    private ZonedDateTime updatedAt;
 
-    protected Notification() {}
+    protected Notification() {
+    }
 
-    public Notification(
-            String recipient,
-            NotificationType type,
-            String subject,
-            String message,
-            LocalDateTime scheduledAt,
-            int maxRetries
-    ){
+    public Notification(String recipient, NotificationType type, String subject, String message, ZonedDateTime scheduledAt, int maxRetries) {
         this.recipient = recipient;
         this.type = type;
         this.subject = subject;
@@ -54,8 +59,8 @@ public class Notification {
         this.maxRetries = maxRetries;
         this.status = NotificationStatus.PENDING;
         this.retryCount = 0;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
+        this.updatedAt = ZonedDateTime.now();
     }
 
     public Long getId() {
@@ -82,11 +87,11 @@ public class Notification {
         return status;
     }
 
-    public LocalDateTime getScheduledAt() {
+    public ZonedDateTime getScheduledAt() {
         return scheduledAt;
     }
 
-    public LocalDateTime getSentAt() {
+    public ZonedDateTime getSentAt() {
         return sentAt;
     }
 
@@ -102,11 +107,11 @@ public class Notification {
         return failureReason;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
