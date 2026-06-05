@@ -1,8 +1,8 @@
-package com.notifyflow.entity;
+package com.notifyflow.notification.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "notifications")
@@ -27,10 +27,10 @@ public class Notification {
     private NotificationStatus status;
 
     @Column(name = "scheduled_at")
-    private LocalDateTime scheduledAt;
+    private ZonedDateTime scheduledAt;
 
     @Column(name = "sent_at")
-    private LocalDateTime sentAt;
+    private ZonedDateTime sentAt;
 
     @Column(name = "retry_count", nullable = false)
     private int retryCount;
@@ -42,15 +42,15 @@ public class Notification {
     private String failureReason;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    private ZonedDateTime updatedAt;
 
     protected Notification() {
     }
 
-    public Notification(String recipient, NotificationType type, String subject, String message, LocalDateTime scheduledAt, int maxRetries) {
+    public Notification(String recipient, NotificationType type, String subject, String message, ZonedDateTime scheduledAt, int maxRetries) {
         this.recipient = recipient;
         this.type = type;
         this.subject = subject;
@@ -59,8 +59,8 @@ public class Notification {
         this.maxRetries = maxRetries;
         this.status = NotificationStatus.PENDING;
         this.retryCount = 0;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
+        this.updatedAt = ZonedDateTime.now();
     }
 
     public Long getId() {
@@ -87,11 +87,11 @@ public class Notification {
         return status;
     }
 
-    public LocalDateTime getScheduledAt() {
+    public ZonedDateTime getScheduledAt() {
         return scheduledAt;
     }
 
-    public LocalDateTime getSentAt() {
+    public ZonedDateTime getSentAt() {
         return sentAt;
     }
 
@@ -107,11 +107,11 @@ public class Notification {
         return failureReason;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public ZonedDateTime getUpdatedAt() {
         return updatedAt;
     }
 
