@@ -1,7 +1,7 @@
-package com.notifyflow.dto;
+package com.notifyflow.notification.dto;
 
-import com.notifyflow.entity.NotificationStatus;
-import com.notifyflow.entity.NotificationType;
+import com.notifyflow.notification.entity.NotificationStatus;
+import com.notifyflow.notification.entity.NotificationType;
 
 import java.time.ZonedDateTime;
 
