@@ -1,7 +1,8 @@
-package com.notifyflow.notification.delivery;
+package com.notifyflow.delivery;
 
 import com.notifyflow.notification.entity.Notification;
 import com.notifyflow.notification.entity.NotificationType;
+import com.notifyflow.notification.exception.NotificationDeliveryException;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumMap;
@@ -29,7 +30,7 @@ public class NotificationDispatcher {
         NotificationSender sender = senders.get(notification.getType());
 
         if (sender == null) {
-            throw new IllegalArgumentException("No sender configured for notification type: " + notification.getType());
+            throw new NotificationDeliveryException("No sender configured for notification type: " + notification.getType());
         }
 
         sender.send(notification);

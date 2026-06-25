@@ -1,4 +1,4 @@
-package com.notifyflow.notification.delivery;
+package com.notifyflow.delivery;
 
 import com.notifyflow.notification.entity.Notification;
 import com.notifyflow.notification.entity.NotificationType;
@@ -7,21 +7,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SmsNotificationSender implements NotificationSender {
+public class EmailNotificationSender implements NotificationSender {
 
-    private static final Logger log = LoggerFactory.getLogger(SmsNotificationSender.class);
+    private static final Logger log = LoggerFactory.getLogger(EmailNotificationSender.class);
 
     @Override
     public NotificationType supports() {
-        return NotificationType.SMS;
+        return NotificationType.EMAIL;
     }
 
     @Override
     public void send(Notification notification) {
         log.info(
-                "Sending SMS notification id={} ro ewcipient={}",
+                "Sending EMAIL notification id={} to recipient={} subject={}",
                 notification.getId(),
-                notification.getRecipient()
+                notification.getRecipient(),
+                notification.getSubject()
         );
     }
 }
