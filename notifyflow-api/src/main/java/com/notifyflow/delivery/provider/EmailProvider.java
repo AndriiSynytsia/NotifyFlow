@@ -1,5 +1,5 @@
 package com.notifyflow.delivery.provider;
 
-public interface EmailProvided {
+public interface EmailProvider {
     void send(EmailMessage message);
 }
