@@ -1,4 +1,4 @@
-package com.notifyflow.notification.exception;
+package com.notifyflow.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.ZonedDateTime;
+import java.util.Locale;
 
 // =============================================================================
 // EDUCATIONAL NOTES — GlobalExceptionHandler
@@ -145,5 +146,16 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.badRequest().body(response);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ApiErrorResponse> handleUnauthorized(UnauthorizedException ex) {
+        ApiErrorResponse response = new ApiErrorResponse(
+                "UNAUTHORIZED",
+                ex.getMessage(),
+                HttpStatus.UNAUTHORIZED.value(),
+                ZonedDateTime.now()
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 }

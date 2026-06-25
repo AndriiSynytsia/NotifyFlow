@@ -1,4 +1,4 @@
-package com.notifyflow.notification.exception;
+package com.notifyflow.exception;
 
 // =============================================================================
 // EDUCATIONAL NOTES — NotificationDeliveryException
