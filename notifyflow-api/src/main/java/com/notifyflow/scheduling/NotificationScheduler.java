@@ -1,4 +1,4 @@
-package com.notifyflow.notification.scheduler;
+package com.notifyflow.scheduling;
 
 import com.notifyflow.delivery.processor.NotificationDeliveryProcessor;
 import com.notifyflow.notification.entity.Notification;
