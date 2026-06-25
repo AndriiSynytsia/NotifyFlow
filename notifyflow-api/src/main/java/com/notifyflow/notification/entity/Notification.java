@@ -5,7 +5,14 @@ import jakarta.persistence.*;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "notifications")
+@Table(
+        name = "notifications",
+        indexes = {
+                @Index(name = "idx_notifications_status", columnList = "status"),
+                @Index(name = "idx_notifications_scheduled_at", columnList = "scheduled_at"),
+                @Index(name = "idx_notifications_status_scheduled_at", columnList = "status, scheduled_at")
+        })
+
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +22,7 @@ public class Notification {
     private String recipient;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private NotificationType type;
 
     @Column(name = "subject", length = 255, nullable = false)
@@ -24,6 +32,7 @@ public class Notification {
     private String message;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private NotificationStatus status;
 
     @Column(name = "scheduled_at")
@@ -115,5 +124,24 @@ public class Notification {
         return updatedAt;
     }
 
-    //TODO: Domain methods to implement as markAsSent, markAsFailed etc.
+    public void markAsProcessing() {
+        if (status != NotificationStatus.PENDING && status != NotificationStatus.QUEUED) {
+            throw new IllegalStateException("Notification can not be processed from status: " + status);
+        }
+        status = NotificationStatus.PROCESSING;
+        updatedAt = ZonedDateTime.now();
+    }
+
+    public void markAsSent() {
+        status = NotificationStatus.SENT;
+        sentAt = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
+    }
+
+    public void markAsFailed(String reason) {
+        retryCount++;
+        failureReason = reason;
+        status = retryCount >= maxRetries ? NotificationStatus.FAILED : NotificationStatus.PENDING;
+        updatedAt = ZonedDateTime.now();
+    }
 }
