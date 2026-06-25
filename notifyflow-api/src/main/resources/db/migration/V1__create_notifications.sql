@@ -1,19 +1,19 @@
 CREATE TABLE notifications (
     id BIGSERIAL PRIMARY KEY,
-    version BIGINT  NOT NULL DEFAULT,
+    version BIGINT  NOT NULL DEFAULT 0,
     recipient VARCHAR(100) NOT NULL,
     type VARCHAR(50) NOT NULL,
     subject VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     status VARCHAR(50) NOT NULL,
-    scheduled_at TIMESTAMPZ,
-    sent_at TIMESTAMPZ,
-    retry_count INT NOT NULL DEFAULT,
+    scheduled_at TIMESTAMPTZ,
+    sent_at TIMESTAMPTZ,
+    retry_count INT NOT NULL DEFAULT 0,
     max_retries INT NOT NULL,
     failure_reason TEXT,
-    created_at TIMESTAMPZ NOT NULL,
-    updated_at TIMESTAMPZ NOT NULL,
-    processing_started_at TIMESTAMPZ
+    created_at TIMESTAMPTZ NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL,
+    processing_started_at TIMESTAMPTZ
 );
 
 CREATE INDEX idx_notifications_status ON notifications (status);
