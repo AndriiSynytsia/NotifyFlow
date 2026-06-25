@@ -1,6 +1,6 @@
-package com.notifyflow.delivery;
+package com.notifyflow.delivery.sender;
 
-import com.notifyflow.notification.entity.Notification;
+import com.notifyflow.delivery.processor.ClaimedNotification;
 import com.notifyflow.notification.entity.NotificationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +17,11 @@ public class SmsNotificationSender implements NotificationSender {
     }
 
     @Override
-    public void send(Notification notification) {
+    public void send(ClaimedNotification notification) {
         log.info(
                 "Sending SMS notification id={} ro ewcipient={}",
-                notification.getId(),
-                notification.getRecipient()
+                notification.id(),
+                notification.recipient()
         );
     }
 }
