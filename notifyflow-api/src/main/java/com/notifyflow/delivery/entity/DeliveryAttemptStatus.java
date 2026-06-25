@@ -1,4 +1,4 @@
-package com.notifyflow.delivery;
+package com.notifyflow.delivery.entity;
 
 public enum DeliveryAttemptStatus {
     STARTED,
