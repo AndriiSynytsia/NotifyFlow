@@ -1,8 +1,9 @@
-package com.notifyflow.delivery;
+package com.notifyflow.delivery.dispatcher;
 
-import com.notifyflow.notification.entity.Notification;
+import com.notifyflow.delivery.processor.ClaimedNotification;
+import com.notifyflow.delivery.sender.NotificationSender;
 import com.notifyflow.notification.entity.NotificationType;
-import com.notifyflow.notification.exception.NotificationDeliveryException;
+import com.notifyflow.exception.NotificationDeliveryException;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumMap;
@@ -26,11 +27,11 @@ public class NotificationDispatcher {
         }
     }
 
-    public void dispatch(Notification notification) {
-        NotificationSender sender = senders.get(notification.getType());
+    public void dispatch(ClaimedNotification notification) {
+        NotificationSender sender = senders.get(notification.type());
 
         if (sender == null) {
-            throw new NotificationDeliveryException("No sender configured for notification type: " + notification.getType());
+            throw new NotificationDeliveryException("No sender configured for notification type: " + notification.type());
         }
 
         sender.send(notification);
